@@ -1,6 +1,33 @@
 // ============================================
 // 💝 CUSTOMIZE YOUR VALENTINE'S WEBSITE HERE 💝
 // ============================================
+const VALENTINE_CONFIG = Object.freeze({
+  meta: {
+    valentineName: "Tonpangmenla oversmart sleeping without me na ❤️",
+    pageTitle: "Will You Be My Valentine? 💗✨",
+    faviconEmoji: "💝",
+  },
+  theme: {
+    background: {
+      type: 'gradient',
+      gradient: {
+        start: '#ffccd5',
+        middle: '#f8c8dc',
+        end: '#f9e4e8'
+      },
+      fallbackImage: 'https://images.unsplash.com/photo-1519741497674-2814507c4d8d?w=1600&q=80',
+      overlayOpacity: 0.65
+    },
+    colors: {
+      primary: '#ff6b81',
+      primaryHover: '#ff878f',
+      accent: '#ffe066',
+      text: '#2d1a26'
+      // add more only after this works
+    }
+  }
+  // ... rest of your config
+});
 
 const CONFIG = {
     // Your Valentine's name that will appear in the title
