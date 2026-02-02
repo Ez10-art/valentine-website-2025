@@ -111,6 +111,16 @@
       font-weight: bold;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #ff6b81;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: fall 4s linear infinite;
+    }
+    @keyframes fall { 0% { transform: translateY(-100vh) rotate(0deg); } 100% { transform: translateY(100vh) rotate(720deg); } }
   </style>
 </head>
 <body>
@@ -120,7 +130,7 @@
   <div class="container">
     <h1>Hey Tonpangmenla oversmart sleeping without me na... 💖✨</h1>
 
-    <img src="https://i.ibb.co/Y7sxXKx6/grok-image-1769426657058.jpg" alt="Tonpangmenla 💕" class="avatar">
+    <img src="https://i.ibb.co/r7S3X66/grok-image-1769426705.jpg" alt="Tonpangmenla 💕" class="avatar">
 
     <div id="q1" class="step active">
       <h2>Do you like me? 🥺</h2>
@@ -159,17 +169,17 @@
   <script>
     const emojis = ['❤️','💖','💝','💗','💓','🧸','🐻','🌹','✨','😘'];
 
-    // Floating
-    function spawn() {
-      const e = document.createElement('div');
-      e.className = 'floating';
-      e.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-      e.style.left = Math.random()*100 + 'vw';
-      e.style.animationDuration = (8 + Math.random()*10) + 's';
-      document.body.appendChild(e);
-      setTimeout(() => e.remove(), 20000);
+    // Floating emojis
+    function spawnEmoji() {
+      const el = document.createElement('div');
+      el.className = 'floating';
+      el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      el.style.left = Math.random()*100 + 'vw';
+      el.style.animationDuration = (8 + Math.random()*10) + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 20000);
     }
-    setInterval(spawn, 500);
+    setInterval(spawnEmoji, 600);
 
     // Music
     const music = document.getElementById('bgMusic');
@@ -188,27 +198,45 @@
     document.getElementById('no1').onmouseover = () => document.getElementById('secret').style.opacity = '1';
     document.getElementById('no1').onmouseout = () => document.getElementById('secret').style.opacity = '0';
 
-    // Step navigation
-    function show(id) {
-      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+    // Navigation
+    function showStep(id) {
+      document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+      const target = document.getElementById(id);
+      if (target) {
+        target.classList.add('active');
+      } else {
+        console.error("Step not found: " + id);
+      }
     }
 
-    document.getElementById('yes1').onclick = () => show('q2');
+    document.getElementById('yes1').onclick = () => showStep('q2');
+    document.getElementById('next2').onclick = () => showStep('q3');
+    document.getElementById('yes3').onclick = () => {
+      showStep('celebration');
+      // Confetti explosion
+      for (let i = 0; i < 150; i++) {
+        setTimeout(() => {
+          const conf = document.createElement('div');
+          conf.className = 'confetti';
+          conf.style.left = Math.random() * 100 + 'vw';
+          conf.style.background = ['#ff6b81', '#ffe066', '#a29bfe'][Math.floor(Math.random()*3)];
+          conf.style.animationDelay = Math.random() * 2 + 's';
+          document.body.appendChild(conf);
+          setTimeout(() => conf.remove(), 6000);
+        }, i * 20);
+      }
+    };
 
     // Interactive love slider
     const slider = document.getElementById('loveSlider');
-    const value = document.getElementById('loveValue');
+    const valueDisplay = document.getElementById('loveValue');
     slider.oninput = () => {
-      const pct = parseInt(slider.value);
-      value.textContent = `This much → ${pct}%`;
-      if (pct > 5000) value.textContent += " WOOOOW insane love!! 🥰🚀";
-      else if (pct > 1000) value.textContent += " To infinity & beyond! 😲💫";
-      else if (pct > 100) value.textContent += " And beyond... 🥺💕";
+      const val = parseInt(slider.value);
+      valueDisplay.textContent = `This much → ${val}%`;
+      if (val > 5000) valueDisplay.textContent += " WOOOOW insane love!! 🥰🚀";
+      else if (val > 1000) valueDisplay.textContent += " To infinity & beyond! 😲💫";
+      else if (val > 100) valueDisplay.textContent += " And beyond... 🥺💕";
     };
-
-    document.getElementById('next2').onclick = () => show('q3');
-    document.getElementById('yes3').onclick = () => show('celebration');
   </script>
 </body>
 </html>
