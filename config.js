@@ -1,89 +1,63 @@
 // ============================================
 // 💝 CUSTOMIZE YOUR VALENTINE'S WEBSITE HERE 💝
 // ============================================
+/**
+ * Valentine Confession Experience - Professional Edition
+ * @author   Senior Frontend Dev + Graphic Designer mindset
+ * @version  2026-valentine-special
+ * @desc     Interactive, emotionally engaging "Will you be my Valentine?" page
+ *           with floating assets, quiz, love meter, photo gallery & celebration
+ */
 
-const CONFIG = {
-    // Your Valentine's name that will appear in the title
-    // Example: "Jade", "Sarah", "Mike"
-    valentineName: "Tonpangmenla oversmart sleeping without me na ",
+const VALENTINE_CONFIG = Object.freeze({
 
-    // The title that appears in the browser tab
-    // You can use emojis! 💝 💖 💗 💓 💞 💕
-    pageTitle: "Will You Be My Valentine? 💝",
+  // ────────────────────────────────────────────────
+  //  Metadata & Personalization
+  // ────────────────────────────────────────────────
+  meta: {
+    valentineName: "Tonpangmenla oversmart sleeping without me na ❤️",
+    pageTitle:      "Will You Be My Valentine? 💗✨",
+    faviconEmoji:   "💝",
+  },
 
-    // Floating emojis that appear in the background
-    // Find more emojis at: https://emojipedia.org
-    floatingEmojis: {
-        hearts: ['❤️', '💖', '💝', '💗', '💓'],  // Heart emojis
-        bears: ['🧸', '🐻']                       // Cute bear emojis
+  // ────────────────────────────────────────────────
+  //  Visual Theme & Colors (Cohesive romantic palette)
+  // ────────────────────────────────────────────────
+  theme: {
+    background: {
+      type: 'gradient',
+      gradient: {
+        start: '#ffccd5',     // soft rose
+        middle: '#f8c8dc',    // blush
+        end:   '#f9e4e8',     // very light peach
+      },
+      fallbackImage: 'https://images.unsplash.com/photo-1519741497674-2814507c4d8d?w=1600&q=80', // soft petals (or your photo)
+      overlayOpacity: 0.65,
     },
-
-    // Questions and answers
-    // Customize each question and its possible responses
-    questions: {
-        first: {
-            text: "Do you like me?",                                    // First interaction
-            yesBtn: "Yes",                                             // Text for "Yes" button
-            noBtn: "No",                                               // Text for "No" button
-            secretAnswer: "I don't like you, I love you! ❤️"           // Secret hover message
-        },
-        second: {
-            text: "How much do you love me?",                          // For the love meter
-            startText: "This much!",                                   // Text before the percentage
-            nextBtn: "Next ❤️"                                         // Text for the next button
-        },
-        third: {
-            text: "Will you be my Valentine on February 14th, 2025? 🌹", // The big question!
-            yesBtn: "Yes!",                                             // Text for "Yes" button
-            noBtn: "No"                                                 // Text for "No" button
-        }
-    },
-
-    // Love meter messages
-    // They show up depending on how far they slide the meter
-    loveMessages: {
-        extreme: "WOOOOW You love me that much?? 🥰😱😱😱🤯🤯🤯🤯🤯🤯🤯🚀💝",  // Shows when they go past 5000%
-        high: "To infinity and beyond! 🚀😲😲😲😲😲🥰💝",              // Shows when they go past 1000%
-        normal: "And beyond! 😢😥😟😟😟"                           // Shows when they go past 100%
-    },
-
-    // Messages that appear after they say "Yes!"
-    celebration: {
-        title: "Yay! I'm the luckiest person in the world! 🎉💝💖💝💓",
-        message: "Now come get your gift, a big warm hug and a huge kiss!",
-        emojis: "🎁💖🤯🤯🤯🤯🤯🤯🤯💝💋❤️💕"  // These will bounce around
-    },
-
-    // Color scheme for the website
-    // Use https://colorhunt.co or https://coolors.co to find beautiful color combinations
     colors: {
-        backgroundStart: "#ffafbd",      // Gradient start (try pastel colors for a soft look)
-        backgroundEnd: "#ffc3a0",        // Gradient end (should complement backgroundStart)
-        buttonBackground: "#ff6b6b",     // Button color (should stand out against the background)
-        buttonHover: "#ff8787",          // Button hover color (slightly lighter than buttonBackground)
-        textColor: "#ff4757"             // Text color (make sure it's readable!)
+      primary:   '#ff6b81',     // vibrant coral pink
+      primaryHover: '#ff878f',
+      accent:    '#ffe066',     // warm golden yellow for highlights
+      text:      '#2d1a26',     // deep plum for readability
+      textLight: '#4a2c3f',
+      success:   '#a29bfe',     // soft purple for yes/celebration
+      danger:    '#ff7675',
     },
-
-    // Animation settings
-    // Adjust these if you want faster/slower animations
-    animations: {
-        floatDuration: "15s",           // How long it takes hearts to float up (10-20s recommended)
-        floatDistance: "50px",          // How far hearts move sideways (30-70px recommended)
-        bounceSpeed: "0.5s",            // Speed of bouncing animations (0.3-0.7s recommended)
-        heartExplosionSize: 1.5         // Size of heart explosion effect (1.2-2.0 recommended)
+    typography: {
+      headingFont: "'Playfair Display', serif",
+      bodyFont:    "'Poppins', sans-serif",
+      baseSize:    'clamp(1.1rem, 2.5vw, 1.25rem)',
     },
+  },
 
-    // Background Music (Optional)
-    // Add your own music URL after getting proper licenses
-    music: {
-        enabled: true,                     // Music feature is enabled
-        autoplay: true,                    // Try to autoplay (note: some browsers may block this)
-        musicUrl: "https://res.cloudinary.com/dncywqfpb/video/upload/v1738399057/music_qrhjvy.mp3", // Music streaming URL
-        startText: "🎵 Play Music",        // Button text to start music
-        stopText: "🔇 Stop Music",         // Button text to stop music
-        volume: 0.5                        // Volume level (0.0 to 1.0)
-    }
-};
+  // ────────────────────────────────────────────────
+  //  Floating Background Elements (optimized performance)
+  // ────────────────────────────────────────────────
+  floatingAssets: {
+    durationMin: '18s',
+    durationMax: '35s',
+    driftRange:  '60px',
+    elements: [
+      // Animated GIFs / PNGs with transparency (better than emoji for polish)
+      { type: 'image', src: 'https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHZ2bG9oZ3V0bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9wN2Z0b3F2bG9w
 
-// Don't modify anything below this line unless you know what you're doing
-window.VALENTINE_CONFIG = CONFIG; 
