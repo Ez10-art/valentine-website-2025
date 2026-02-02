@@ -1,242 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Will You Be My Valentine? 💝 Tonpangmenla</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💝</text></svg>">
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #ffccd5, #f9e4e8);
-      font-family: system-ui, sans-serif;
-      color: #ff4757;
-      text-align: center;
-      overflow-x: hidden;
-      position: relative;
-    }
-    .container {
-      padding: 30px 20px;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    h1 {
-      font-size: 2.6rem;
-      margin: 1rem 0;
-      color: #ff6b81;
-    }
-    .avatar {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 5px solid #ff6b81;
-      box-shadow: 0 10px 30px rgba(255,107,107,0.4);
-      margin: 1.5rem auto;
-    }
-    button {
-      padding: 14px 32px;
-      margin: 12px;
-      font-size: 1.3rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      background: #ff6b6b;
-      color: white;
-      box-shadow: 0 6px 20px rgba(255,107,107,0.3);
-      transition: all 0.3s;
-    }
-    button:hover {
-      transform: scale(1.08) translateY(-4px);
-      background: #ff8787;
-    }
-    #noBtn {
-      background: #aaa;
-    }
-    #loveMeterContainer {
-      margin: 2rem auto;
-      width: 90%;
-      max-width: 500px;
-    }
-    #loveSlider {
-      width: 100%;
-      height: 20px;
-      background: #eee;
-      border-radius: 10px;
-      appearance: none;
-      outline: none;
-    }
-    #loveSlider::-webkit-slider-thumb {
-      appearance: none;
-      width: 40px;
-      height: 40px;
-      background: #ff6b6b url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') center/cover no-repeat;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-    #loveValue {
-      font-size: 2rem;
-      font-weight: bold;
-      color: #ff4757;
-      margin-top: 1rem;
-    }
-    .step { display: none; }
-    .active { display: block; animation: fadeIn 0.8s; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
-    .floating {
-      position: absolute;
-      font-size: 2.5rem;
-      pointer-events: none;
-      animation: float 12s infinite linear;
-      opacity: 0.8;
-    }
-    @keyframes float { 0% { transform: translateY(120vh); } 100% { transform: translateY(-30vh) rotate(720deg); } }
-    #celebration {
-      display: none;
-      font-size: 2.8rem;
-      animation: bounce 1.5s infinite;
-    }
-    @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-    #musicToggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 12px 24px;
-      background: rgba(255,255,255,0.4);
-      border-radius: 50px;
-      border: 1px solid white;
-      backdrop-filter: blur(10px);
-      font-weight: bold;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    .confetti {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: #ff6b81;
-      border-radius: 50%;
-      pointer-events: none;
-      animation: fall 4s linear infinite;
-    }
-    @keyframes fall { 0% { transform: translateY(-100vh) rotate(0deg); } 100% { transform: translateY(100vh) rotate(720deg); } }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Will You Be My Valentine?</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ffccd5, #f9e4e8);
+    text-align: center;
+    padding: 50px;
+    color: #ff4757;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  button {
+    padding: 12px 24px;
+    margin: 10px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 25px;
+    background-color: #ff6b81;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  button:hover {
+    background-color: #ff8787;
+  }
+  #message {
+    margin-top: 30px;
+    font-size: 1.5rem;
+    min-height: 50px;
+  }
+</style>
 </head>
 <body>
 
-  <button id="musicToggle">🎵 Play Music</button>
+<h1>Will You Be My Valentine? 💝</h1>
 
-  <div class="container">
-    <h1>Hey Tonpangmenla oversmart sleeping without me na... 💖✨</h1>
+<div id="question">
+  <p>Do you like me?</p>
+  <button id="yesBtn">Yes!</button>
+  <button id="noBtn">Maybe...</button>
+</div>
 
-    <img src="https://i.ibb.co/r7S3X66/grok-image-1769426705.jpg" alt="Tonpangmenla 💕" class="avatar">
+<div id="response" style="display:none;">
+  <p id="answerText"></p>
+  <button id="nextBtn" style="display:none;">Next</button>
+</div>
 
-    <div id="q1" class="step active">
-      <h2>Do you like me? 🥺</h2>
-      <button id="yes1">Yes of course!</button>
-      <button id="no1">Hmm... maybe?</button>
-      <p id="secret" style="margin-top:1.5rem; opacity:0; transition:opacity 0.7s; font-style:italic;">
-        (hover over maybe: I don't just like you... I LOVE YOU silly! 😘❤️)
-      </p>
-    </div>
+<div id="finalMessage" style="margin-top:30px; font-size:2rem; display:none;">
+  <p>YAY! You're my Valentine! 🎉💖</p>
+</div>
 
-    <div id="q2" class="step">
-      <h2>Show me how much you love me 😍</h2>
-      <div id="loveMeterContainer">
-        <input type="range" min="0" max="10000" value="0" id="loveSlider">
-      </div>
-      <div id="loveValue">This much → 0%</div>
-      <button id="next2">Next naa ❤️</button>
-    </div>
+<script>
+  const questionDiv = document.getElementById('question');
+  const responseDiv = document.getElementById('response');
+  const answerText = document.getElementById('answerText');
+  const nextBtn = document.getElementById('nextBtn');
+  const finalMsg = document.getElementById('finalMessage');
 
-    <div id="q3" class="step">
-      <h2>Will you be my Valentine on Feb 14th, 2026? 🌹</h2>
-      <button id="yes3">YES YES YES!</button>
-      <button id="no3">No way 😏</button>
-    </div>
+  document.getElementById('yesBtn').onclick = () => {
+    questionDiv.style.display = 'none';
+    responseDiv.style.display = 'block';
+    answerText.innerHTML = "Aww, I like you too! 💖<br>Want to be my Valentine?";
+    nextBtn.style.display = 'inline-block';
+  };
 
-    <div id="celebration" class="step">
-      <h2>YAYYYY! You're my Valentine forever! 🎉💝💖💓</h2>
-      <p>I'm the luckiest! Come get endless hugs, kisses & no more sleeping without me na 😘✨</p>
-    </div>
-  </div>
+  document.getElementById('noBtn').onclick = () => {
+    questionDiv.style.display = 'none';
+    responseDiv.style.display = 'block';
+    answerText.innerHTML = "That's okay! Maybe next time! 😊";
+    nextBtn.style.display = 'none';
+  };
 
-  <audio id="bgMusic" loop>
-    <source src="https://res.cloudinary.com/dncywqfpb/video/upload/v1738399057/music_qrhjvy.mp3" type="audio/mpeg">
-  </audio>
+  document.getElementById('nextBtn').onclick = () => {
+    responseDiv.style.display = 'none';
+    finalMsg.style.display = 'block';
+  };
+</script>
 
-  <script>
-    const emojis = ['❤️','💖','💝','💗','💓','🧸','🐻','🌹','✨','😘'];
-
-    // Floating emojis
-    function spawnEmoji() {
-      const el = document.createElement('div');
-      el.className = 'floating';
-      el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-      el.style.left = Math.random()*100 + 'vw';
-      el.style.animationDuration = (8 + Math.random()*10) + 's';
-      document.body.appendChild(el);
-      setTimeout(() => el.remove(), 20000);
-    }
-    setInterval(spawnEmoji, 600);
-
-    // Music
-    const music = document.getElementById('bgMusic');
-    document.getElementById('musicToggle').onclick = () => {
-      if (music.paused) {
-        music.volume = 0.4;
-        music.play().catch(()=>{});
-        event.target.textContent = '🔇 Stop Music';
-      } else {
-        music.pause();
-        event.target.textContent = '🎵 Play Music';
-      }
-    };
-
-    // Secret hover
-    document.getElementById('no1').onmouseover = () => document.getElementById('secret').style.opacity = '1';
-    document.getElementById('no1').onmouseout = () => document.getElementById('secret').style.opacity = '0';
-
-    // Navigation
-    function showStep(id) {
-      document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
-      const target = document.getElementById(id);
-      if (target) {
-        target.classList.add('active');
-      } else {
-        console.error("Step not found: " + id);
-      }
-    }
-
-    document.getElementById('yes1').onclick = () => showStep('q2');
-    document.getElementById('next2').onclick = () => showStep('q3');
-    document.getElementById('yes3').onclick = () => {
-      showStep('celebration');
-      // Confetti explosion
-      for (let i = 0; i < 150; i++) {
-        setTimeout(() => {
-          const conf = document.createElement('div');
-          conf.className = 'confetti';
-          conf.style.left = Math.random() * 100 + 'vw';
-          conf.style.background = ['#ff6b81', '#ffe066', '#a29bfe'][Math.floor(Math.random()*3)];
-          conf.style.animationDelay = Math.random() * 2 + 's';
-          document.body.appendChild(conf);
-          setTimeout(() => conf.remove(), 6000);
-        }, i * 20);
-      }
-    };
-
-    // Interactive love slider
-    const slider = document.getElementById('loveSlider');
-    const valueDisplay = document.getElementById('loveValue');
-    slider.oninput = () => {
-      const val = parseInt(slider.value);
-      valueDisplay.textContent = `This much → ${val}%`;
-      if (val > 5000) valueDisplay.textContent += " WOOOOW insane love!! 🥰🚀";
-      else if (val > 1000) valueDisplay.textContent += " To infinity & beyond! 😲💫";
-      else if (val > 100) valueDisplay.textContent += " And beyond... 🥺💕";
-    };
-  </script>
 </body>
 </html>
