@@ -3,355 +3,212 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Will You Be My Valentine? 💖 Tonpangmenla</title>
+  <title>Will You Be My Valentine? 💝 Tonpangmenla</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💝</text></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg1: #ffccd5;
-      --bg2: #f9e4e8;
-      --pink: #ff6b81;
-      --pink-light: #ff878f;
-      --gold: #ffe066;
-      --purple: #a29bfe;
-      --dark: #2d1a26;
-      --shadow: 0 12px 35px rgba(255,107,107,0.28);
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
     body {
+      margin: 0;
       min-height: 100vh;
-      background: linear-gradient(135deg, var(--bg1), var(--bg2));
-      font-family: 'Poppins', sans-serif;
-      color: var(--dark);
+      background: linear-gradient(135deg, #ffccd5, #f9e4e8);
+      font-family: system-ui, sans-serif;
+      color: #ff4757;
+      text-align: center;
       overflow-x: hidden;
       position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: clamp(15px, 4vw, 30px);
-    }
-    .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 6px;
-      background: rgba(255,255,255,0.4);
-      z-index: 999;
-    }
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--pink), var(--purple));
-      transition: width 0.6s ease;
     }
     .container {
-      max-width: 820px;
-      width: 100%;
-      z-index: 10;
-      animation: fadeUp 1s ease-out;
+      padding: 30px 20px;
+      max-width: 700px;
+      margin: 0 auto;
     }
-    @keyframes fadeUp { from { opacity:0; transform:translateY(50px); } to { opacity:1; transform:none; } }
     h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.4rem, 7vw, 4rem);
-      margin-bottom: 0.8rem;
-      text-shadow: 0 4px 15px rgba(0,0,0,0.12);
+      font-size: 2.6rem;
+      margin: 1rem 0;
+      color: #ff6b81;
     }
-    h2 {
-      font-size: clamp(1.7rem, 5vw, 2.4rem);
-      margin: 1.8rem 0 1.2rem;
+    .avatar {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #ff6b81;
+      box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+      margin: 1.5rem auto;
     }
-    button, .quiz-btn {
-      padding: 16px 38px;
-      margin: 12px 10px;
+    button {
+      padding: 14px 32px;
+      margin: 12px;
       font-size: 1.3rem;
-      font-weight: 600;
       border: none;
-      border-radius: 60px;
+      border-radius: 50px;
       cursor: pointer;
-      background: var(--pink);
+      background: #ff6b6b;
       color: white;
-      box-shadow: var(--shadow);
-      transition: all 0.45s cubic-bezier(0.68,-0.55,0.265,1.55);
+      box-shadow: 0 6px 20px rgba(255,107,107,0.3);
+      transition: all 0.3s;
     }
-    button:hover, .quiz-btn:hover {
-      transform: translateY(-8px) scale(1.08);
-      background: var(--pink-light);
-      box-shadow: 0 20px 40px rgba(255,107,107,0.35);
+    button:hover {
+      transform: scale(1.08) translateY(-4px);
+      background: #ff8787;
     }
-    .no-btn { background: #bbb; }
-    .no-btn:hover { background: #999; transform: translateY(-4px); }
-    .quiz-btn {
-      display: block;
-      margin: 1.2rem auto;
-      max-width: 90%;
-      padding: 18px 24px;
-      background: white;
-      color: var(--dark);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-      font-size: 1.25rem;
-    }
-    .quiz-btn:hover { background: var(--gold); }
-    .feedback {
-      margin: 1.8rem 0;
-      font-size: 1.5rem;
-      font-weight: 700;
-      min-height: 2.2rem;
-      animation: pop 0.6s;
-    }
-    @keyframes pop { 0% { transform:scale(0.7); opacity:0; } 100% { transform:scale(1); opacity:1; } }
-    .floating {
-      position: absolute;
-      font-size: 3rem;
-      pointer-events: none;
-      animation: rise 18s infinite linear;
-      opacity: 0.9;
-    }
-    @keyframes rise {
-      0% { transform: translateY(140vh) rotate(0deg); opacity: 0; }
-      15% { opacity: 0.9; }
-      100% { transform: translateY(-60vh) rotate(1440deg); opacity: 0; }
+    #noBtn {
+      background: #aaa;
     }
     #loveMeterContainer {
       margin: 2rem auto;
       width: 90%;
       max-width: 500px;
-      background: rgba(255,255,255,0.35);
-      border-radius: 50px;
-      padding: 12px;
-      box-shadow: inset 0 4px 15px rgba(0,0,0,0.08);
     }
     #loveSlider {
-      -webkit-appearance: none;
       width: 100%;
-      height: 18px;
-      border-radius: 9px;
-      background: linear-gradient(to right, #ffe066 0%, var(--pink) 100%);
+      height: 20px;
+      background: #eee;
+      border-radius: 10px;
+      appearance: none;
       outline: none;
-      opacity: 0.9;
-      transition: opacity .2s;
     }
     #loveSlider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 38px;
-      height: 38px;
+      appearance: none;
+      width: 40px;
+      height: 40px;
+      background: #ff6b6b url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') center/cover no-repeat;
       border-radius: 50%;
-      background: white url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23ff6b81" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>') center/70% no-repeat;
       cursor: pointer;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      transition: all 0.3s;
     }
-    #loveSlider::-webkit-slider-thumb:hover { transform: scale(1.2); }
     #loveValue {
-      font-size: 1.8rem;
-      font-weight: 700;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ff4757;
       margin-top: 1rem;
-      color: var(--pink);
-      text-shadow: 0 2px 6px rgba(255,107,107,0.3);
     }
+    .step { display: none; }
+    .active { display: block; animation: fadeIn 0.8s; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+    .floating {
+      position: absolute;
+      font-size: 2.5rem;
+      pointer-events: none;
+      animation: float 12s infinite linear;
+      opacity: 0.8;
+    }
+    @keyframes float { 0% { transform: translateY(120vh); } 100% { transform: translateY(-30vh) rotate(720deg); } }
+    #celebration {
+      display: none;
+      font-size: 2.8rem;
+      animation: bounce 1.5s infinite;
+    }
+    @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
     #musicToggle {
       position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 100;
-      padding: 12px 26px;
+      padding: 12px 24px;
       background: rgba(255,255,255,0.4);
       border-radius: 50px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.6);
-      font-weight: 600;
-    }
-    #celebration {
-      display: none;
-      animation: fadeUp 1.6s;
-    }
-    @media (max-width: 600px) {
-      h1 { font-size: 2.2rem; }
-      h2 { font-size: 1.7rem; }
-      button, .quiz-btn { padding: 14px 28px; font-size: 1.15rem; }
+      border: 1px solid white;
+      backdrop-filter: blur(10px);
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
 
-  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
-
   <button id="musicToggle">🎵 Play Music</button>
 
   <div class="container">
-    
-    <div id="q2" class="step" style="display:none;">
-      <h1>Hey Tonpangmenla oversmart sleeping without me na... 💖✨</h1>
+    <h1>Hey Tonpangmenla oversmart sleeping without me na... 💖✨</h1>
 
-<div style="margin: 2rem 0; text-align: center;">
-  <img 
-    src="https://i.ibb.co/r7S3X66/grok-image-1769426705.jpg" 
-    alt="Tonpangmenla 💕" 
-    style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 6px solid #ff6b81; box-shadow: 0 12px 35px rgba(255,107,107,0.35);"
-  >
-</div>
+    <img src="https://i.ibb.co/r7S3X66/grok-image-1769426705.jpg" alt="Tonpangmenla 💕" class="avatar">
 
-<h2>Do you like me? 🥺💕</h2>
+    <div id="q1" class="step active">
+      <h2>Do you like me? 🥺</h2>
+      <button id="yes1">Yes of course!</button>
+      <button id="no1">Hmm... maybe?</button>
+      <p id="secret" style="margin-top:1.5rem; opacity:0; transition:opacity 0.7s; font-style:italic;">
+        (hover over maybe: I don't just like you... I LOVE YOU silly! 😘❤️)
+      </p>
+    </div>
 
-<button id="yes1">Yes of course!</button>
-<button id="no1" class="no-btn">Hmm... maybe?</button>
-<p id="secret" style="margin-top:1.5rem; opacity:0; transition:opacity 0.7s; font-style:italic;">
-  (hover over No: I don't just like you... I LOVE YOU silly! 😘❤️)
-</p>veMeterContainer">
-        <input type="range" min="0" max="10000" value="0" id="loveSlider" />
+    <div id="q2" class="step">
+      <h2>Show me how much you love me 😍</h2>
+      <div id="loveMeterContainer">
+        <input type="range" min="0" max="10000" value="0" id="loveSlider">
       </div>
       <div id="loveValue">This much → 0%</div>
       <button id="next2">Next naa ❤️</button>
     </div>
 
-    <div id="q3" class="step" style="display:none;">
-      <h2>Big question time... Will you be my Valentine on Feb 14th, 2026? 🌹😳</h2>
+    <div id="q3" class="step">
+      <h2>Will you be my Valentine on Feb 14th, 2026? 🌹</h2>
       <button id="yes3">YES YES YES!</button>
-      <button id="no3" class="no-btn">Umm... no?</button>
+      <button id="no3">No way 😏</button>
     </div>
 
-    <div id="q4" class="step" style="display:none;">
-      <h2>Quiz time! What's my favorite thing about you? 🧐💖</h2>
-      <button class="quiz-btn" data-correct="true">Your cute smile 😊</button>
-      <button class="quiz-btn" data-correct="false">Your dramatic laugh 😂</button>
-      <button class="quiz-btn" data-correct="false">Your oversmart replies 🧠</button>
-      <button class="quiz-btn" data-correct="true">All of the above! You're perfect 😍</button>
-      <p id="q4fb" class="feedback"></p>
-    </div>
-
-    <div id="q5" class="step" style="display:none;">
-      <h2>Which of these makes you happiest with me? 🥰</h2>
-      <button class="quiz-btn" data-correct="true">Late night talks until we both sleep 😴</button>
-      <button class="quiz-btn" data-correct="true">Teasing each other until we can't stop laughing</button>
-      <button class="quiz-btn" data-correct="false">You sleeping without saying good night 😤</button>
-      <button class="quiz-btn" data-correct="true">Just chilling & being silly together</button>
-      <p id="q5fb" class="feedback"></p>
-    </div>
-
-    <div id="q6" class="step" style="display:none;">
-      <h2>Last promise... no more sleeping without good night text? 😴💤</h2>
-      <button id="yes6">Yes promise! 🤝💕</button>
-      <button id="no6" class="no-btn">Maybe sometimes 😏</button>
-      <p id="q6fb" class="feedback"></p>
-    </div>
-
-    <div id="celebration" class="step" style="display:none;">
-      <h2>YAYYYYYY!!! You're officially my Valentine forever! 🎉💝💖💓</h2>
-      <p>I'm the luckiest person alive right now 😭✨<br>Come here for endless hugs, kisses & no more sleeping alone na 😘</p>
+    <div id="celebration" class="step">
+      <h2>YAYYYY! You're my Valentine forever! 🎉💝💖💓</h2>
+      <p>I'm the luckiest! Come get endless hugs, kisses & no more sleeping without me na 😘✨</p>
     </div>
   </div>
 
-  <audio id="bgMusic" loop preload="auto">
+  <audio id="bgMusic" loop>
     <source src="https://res.cloudinary.com/dncywqfpb/video/upload/v1738399057/music_qrhjvy.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    // Config
-    const emojis = ['❤️','💖','💝','💗','💓','🧸','🐻','🌹','✨','😘','🥰','🚀'];
+    const emojis = ['❤️','💖','💝','💗','💓','🧸','🐻','🌹','✨','😘'];
 
-    // Music
-    const audio = document.getElementById('bgMusic');
-    document.getElementById('musicToggle').onclick = () => {
-      if (audio.paused) {
-        audio.volume = 0.45;
-        audio.play().catch(() => {});
-        event.target.textContent = '🔇 Stop Music';
-      } else {
-        audio.pause();
-        event.target.textContent = '🎵 Play Music';
-      }
-    };
-
-    // Floating emojis
+    // Floating
     function spawn() {
       const e = document.createElement('div');
       e.className = 'floating';
       e.textContent = emojis[Math.floor(Math.random()*emojis.length)];
       e.style.left = Math.random()*100 + 'vw';
-      e.style.animationDuration = (12 + Math.random()*12) + 's';
+      e.style.animationDuration = (8 + Math.random()*10) + 's';
       document.body.appendChild(e);
-      setTimeout(() => e.remove(), 35000);
+      setTimeout(() => e.remove(), 20000);
     }
-    setInterval(spawn, 600);
+    setInterval(spawn, 500);
 
-    // Progress bar (6 steps)
-    const steps = ['q1','q2','q3','q4','q5','q6','celebration'];
-    function updateProgress() {
-      const current = steps.findIndex(id => document.getElementById(id).style.display !== 'none');
-      document.getElementById('progress').style.width = ((current + 1) / steps.length * 100) + '%';
-    }
-
-    // Navigation
-    function goTo(id) {
-      document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
-      updateProgress();
-    }
-
-    document.getElementById('yes1').onclick = () => goTo('q2');
-    document.getElementById('next2').onclick = () => goTo('q3');
-    document.getElementById('yes3').onclick = () => goTo('q4');
-
-    // Secret hover
-    document.getElementById('no1').onmouseenter = () => document.getElementById('secret').style.opacity = '1';
-    document.getElementById('no1').onmouseleave = () => document.getElementById('secret').style.opacity = '0';
-
-    // Interactive love slider
-    const slider = document.getElementById('loveSlider');
-    const valueDisplay = document.getElementById('loveValue');
-    slider.oninput = () => {
-      const val = parseInt(slider.value);
-      valueDisplay.textContent = `This much → ${val}%`;
-      if (val > 5000) valueDisplay.textContent += " WOOOOW insane love!! 🥰🚀";
-      else if (val > 1000) valueDisplay.textContent += " To infinity & beyond! 😲💫";
-      else if (val > 100) valueDisplay.textContent += " And beyond... 🥺💕";
-    };
-
-    // Quiz logic
-    const quizFeedback = {
-      q4: { true: "Yes yes yes! You're my everything 😍", false: "Hmm close... but it's ALL of them! ❤️" },
-      q5: { true: "Exactly! That's our vibe 🥰", false: "Maybe... but I love every second with you anyway 😏" }
-    };
-
-    ['q4','q5'].forEach(q => {
-      document.querySelectorAll(`#${q} .quiz-btn`).forEach(btn => {
-        btn.onclick = () => {
-          const correct = btn.dataset.correct === 'true';
-          const fb = document.getElementById(q + 'fb');
-          fb.textContent = correct ? quizFeedback[q].true : quizFeedback[q].false;
-          fb.style.color = correct ? '#a29bfe' : '#ff6b81';
-          fb.style.animation = 'pop 0.6s';
-          setTimeout(() => goTo('q' + (parseInt(q.slice(1)) + 1)), 2200);
-        };
-      });
-    });
-
-    // Final yes → celebration
-    document.getElementById('yes6').onclick = () => {
-      goTo('celebration');
-      // Massive confetti + hearts
-      for(let i = 0; i < 180; i++) {
-        setTimeout(() => {
-          const c = document.createElement('div');
-          c.className = 'confetti';
-          c.style.left = Math.random() * 100 + 'vw';
-          c.style.background = ['#ff6b81','#ffe066','#a29bfe'][Math.floor(Math.random()*3)];
-          c.style.width = c.style.height = (6 + Math.random()*12) + 'px';
-          document.body.appendChild(c);
-          setTimeout(() => c.remove(), 7000);
-        }, i * 30);
+    // Music
+    const music = document.getElementById('bgMusic');
+    document.getElementById('musicToggle').onclick = () => {
+      if (music.paused) {
+        music.volume = 0.4;
+        music.play().catch(()=>{});
+        event.target.textContent = '🔇 Stop Music';
+      } else {
+        music.pause();
+        event.target.textContent = '🎵 Play Music';
       }
     };
 
-    document.getElementById('no6').onclick = () => {
-      document.getElementById('q6fb').textContent = "Nooooo 😭😭 Promise naa... or the hearts will kidnap you! 🥺💕";
-      document.getElementById('q6fb').style.color = '#ff6b81';
+    // Secret hover
+    document.getElementById('no1').onmouseover = () => document.getElementById('secret').style.opacity = '1';
+    document.getElementById('no1').onmouseout = () => document.getElementById('secret').style.opacity = '0';
+
+    // Step navigation
+    function show(id) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    document.getElementById('yes1').onclick = () => show('q2');
+
+    // Interactive love slider
+    const slider = document.getElementById('loveSlider');
+    const value = document.getElementById('loveValue');
+    slider.oninput = () => {
+      const pct = parseInt(slider.value);
+      value.textContent = `This much → ${pct}%`;
+      if (pct > 5000) value.textContent += " WOOOOW insane love!! 🥰🚀";
+      else if (pct > 1000) value.textContent += " To infinity & beyond! 😲💫";
+      else if (pct > 100) value.textContent += " And beyond... 🥺💕";
     };
 
-    // Start with first question
-    goTo('q1');
+    document.getElementById('next2').onclick = () => show('q3');
+    document.getElementById('yes3').onclick = () => show('celebration');
   </script>
 </body>
 </html>
