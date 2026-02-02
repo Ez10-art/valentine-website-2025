@@ -1,77 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CUSTOMIZE: Browser tab title -->
-    <title>Will You Be My Valentine? 💝</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Styles -->
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Will You Be My Valentine? 💝</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+      font-family: system-ui, sans-serif;
+      color: #ff4757;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .container { max-width: 90%; z-index: 10; padding: 20px; }
+    h1, h2 { margin: 1rem 0; text-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+    button {
+      padding: 14px 30px;
+      margin: 10px;
+      font-size: 1.3rem;
+      border: none;
+      border-radius: 999px;
+      background: #ff6b6b;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+      transition: 0.3s;
+    }
+    button:hover { transform: scale(1.08); background: #ff8787; }
+    #noBtn { background: #aaa; }
+    .quiz-option {
+      display: block;
+      margin: 12px auto;
+      padding: 16px;
+      font-size: 1.2rem;
+      background: white;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+    .quiz-option:hover { background: #ffeaa7; transform: translateY(-3px); }
+    .feedback { margin: 1rem 0; font-size: 1.3rem; font-weight: bold; }
+    .floating {
+      position: absolute;
+      font-size: 2.5rem;
+      pointer-events: none;
+      animation: float 14s infinite linear;
+      opacity: 0.75;
+    }
+    @keyframes float {
+      0% { transform: translateY(120vh) rotate(0deg); }
+      100% { transform: translateY(-30vh) rotate(1080deg); }
+    }
+    #musicToggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 100;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: rgba(255,255,255,0.4);
+      border-radius: 999px;
+      border: 1px solid white;
+      backdrop-filter: blur(8px);
+    }
+    #celebration { display: none; font-size: 2.8rem; animation: bounce 1.2s infinite; }
+    @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-25px); } }
+  </style>
 </head>
 <body>
-    <!-- Floating Background Elements -->
-    <div class="floating-elements">
-        <!-- Hearts and bears will be added here by JavaScript -->
+
+  <button id="musicToggle">🎵 Play Music</button>
+
+  <div class="container">
+    <h1>Hey Tonpangmenla oversmart sleeping without me na... 💖</h1>
+
+    <div id="q1">
+      <h2>Do you like me? 🥺</h2>
+      <button id="yes1">Yes</button>
+      <button id="no1">No</button>
+      <p id="secret" style="margin-top:1rem; opacity:0; transition:0.5s;">
+        (hover secret: I don't like you... I LOVE YOU! ❤️)
+      </p>
     </div>
 
-    <!-- Main Content Container -->
-    <div class="container">
-        <h1 id="valentineTitle"></h1>
-        
-        <!-- Music Player -->
-        <div id="musicControls" class="music-controls">
-            <button id="musicToggle" class="music-btn">🎵 Play Music</button>
-            <audio id="bgMusic" loop>
-                <source id="musicSource" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-
-        <!-- First Question -->
-        <div class="question-section" id="question1">
-            <h2 id="question1Text"></h2>
-            <button class="cute-btn" onclick="moveButton(this)" id="yesBtn1"></button>
-            <button class="cute-btn" onclick="moveButton(this)" id="noBtn1"></button>
-            <!-- CUSTOMIZE: Secret answer text -->
-            <div class="secret-answer">
-                <button class="cute-btn special" onclick="showNextQuestion(2)" id="secretAnswerBtn"></button>
-            </div>
-        </div>
-
-        <!-- Second Question (Love Meter) -->
-        <div class="question-section hidden" id="question2">
-            <h2 id="question2Text"></h2>
-            <!-- Love meter settings: min="0" max="10000" -->
-            <div class="love-meter">
-                <input type="range" min="0" max="10000" value="100" class="slider" id="loveMeter">
-                <p>
-                    <span class="love-value-container"><span id="startText"></span> (<span id="loveValue">100</span>%)</span>
-                    <span id="extraLove" class="hidden"></span>
-                </p>
-            </div>
-            <button class="cute-btn" onclick="showNextQuestion(3)" id="nextBtn"></button>
-        </div>
-
-        <!-- Final Question -->
-        <div class="question-section hidden" id="question3">
-            <h2 id="question3Text"></h2>
-            <button class="cute-btn final-yes" onclick="celebrate()" id="yesBtn3"></button>
-            <button class="cute-btn" onclick="moveButton(this)" id="noBtn3"></button>
-        </div>
-
-        <!-- CUSTOMIZE: Celebration message -->
-        <div class="celebration hidden" id="celebration">
-            <h2 id="celebrationTitle"></h2>
-            <p class="celebration-text" id="celebrationMessage"></p>
-            <p class="celebration-text" id="celebrationEmojis"></p>
-        </div>
+    <div id="q2" style="display:none;">
+      <h2>How much do you love me? 💕</h2>
+      <div id="loveMeter"><div id="meterFill"></div></div>
+      <p id="meterText">This much! (0%)</p>
+      <button id="next2">Next ❤️</button>
     </div>
 
-    <!-- Scripts -->
-    <script src="config.js"></script>
-    <script src="theme.js"></script>
-    <script src="script.js"></script>
+    <div id="q3" style="display:none;">
+      <h2>Will you be my Valentine on February 14th, 2026? 🌹</h2>
+      <button id="yes3">Yes!</button>
+      <button id="no3">No</button>
+    </div>
+
+    <!-- New Quiz Questions -->
+    <div id="q4" style="display:none;">
+      <h2>Quick Quiz: What's my favorite thing about you?</h2>
+      <div class="quiz-option" data-correct="true">Your smile 😊</div>
+      <div class="quiz-option" data-correct="false">Your laugh 😂</div>
+      <div class="quiz-option" data-correct="false">Your oversmart brain 🧠</div>
+      <div class="quiz-option" data-correct="true">All of the above! ❤️</div>
+      <p id="q4feedback" class="feedback"></p>
+    </div>
+
+    <div id="q5" style="display:none;">
+      <h2>Choose your favorite thing we do together</h2>
+      <div class="quiz-option" data-correct="true">Late night talks until we fall asleep 😴</div>
+      <div class="quiz-option" data-correct="true">Teasing each other and laughing non-stop</div>
+      <div class="quiz-option" data-correct="false">Eating your spicy food that burns my tongue 🔥</div>
+      <div class="quiz-option" data-correct="true">Just being lazy together</div>
+      <p id="q5feedback" class="feedback"></p>
+    </div>
+
+    <div id="q6" style="display:none;">
+      <h2>Promise me you'll never sleep without saying good night? 😴💤</h2>
+      <button id="yes6">Yes, promise! 🤝</button>
+      <button id="no6">No way 😏</button>
+    </div>
+
+    <div id="celebration" style="display:none;">
+      <h2>YAYYYY! You're officially my Valentine! 🎉💝💖💓</h2>
+      <p>I'm the luckiest! Come get your gift: endless hugs + kisses + no more sleeping without me na 😘</p>
+    </div>
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="https://res.cloudinary.com/dncywqfpb/video/upload/v1738399057/music_qrhjvy.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Music
+    const music = document.getElementById('bgMusic');
+    document.getElementById('musicToggle').onclick = () => {
+      if (music.paused) {
+        music.volume = 0.4;
+        music.play().catch(() => {});
+        document.getElementById('musicToggle').textContent = '🔇 Stop Music';
+      } else {
+        music.pause();
+        document.getElementById('musicToggle').textContent = '🎵 Play Music';
+      }
+    };
+
+    // Floating
+    const emojis = ['❤️','💖','💝','💗','💓','🧸','🐻','🌹','😘'];
+    function createFloat() {
+      const el = document.createElement('div');
+      el.className = 'floating';
+      el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      el.style.left = Math.random()*100 + 'vw';
+      el.style.animationDuration = (10 + Math.random()*12) + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 30000);
+    }
+    setInterval(createFloat, 700);
+
+    // Secret hover
+    const secret = document.getElementById('secret');
+    document.getElementById('no1').onmouseover = () => secret.style.opacity = '1';
+    document.getElementById('no1').onmouseout = () => secret.style.opacity = '0';
+
+    // Navigation helper
+    function nextStep(currentId, nextId) {
+      document.getElementById(currentId).style.display = 'none';
+      document.getElementById(nextId).style.display = 'block';
+    }
+
+    document.getElementById('yes1').onclick = () => nextStep('q1', 'q2');
+    document.getElementById('next2').onclick = () => nextStep('q2', 'q3');
+    document.getElementById('yes3').onclick = () => nextStep('q3', 'q4');
+
+    // Love meter
+    let love = 0;
+    document.addEventListener('mousemove', () => {
+      if (document.getElementById('q2').style.display !== 'none') {
+        love = Math.min(9999, love + 0.6);
+        document.getElementById('meterFill').style.width = (love / 100) + '%';
+        document.getElementById('meterText').textContent = `This much! (${Math.floor(love)}%)`;
+        if (love > 1000) document.getElementById('meterText').textContent += " ∞ & beyond! 🚀🥰";
+      }
+    });
+
+    // Quiz logic
+    function handleQuizClick(option, feedbackId, correctMsg, wrongMsg) {
+      const isCorrect = option.dataset.correct === 'true';
+      document.getElementById(feedbackId).textContent = isCorrect ? correctMsg : wrongMsg;
+      document.getElementById(feedbackId).style.color = isCorrect ? '#2ecc71' : '#e74c3c';
+      // Move to next after 1.5s
+      setTimeout(() => nextStep(option.parentElement.id, 'q' + (parseInt(option.parentElement.id.slice(1)) + 1)), 1800);
+    }
+
+    document.querySelectorAll('#q4 .quiz-option').forEach(opt => {
+      opt.onclick = () => handleQuizClick(opt, 'q4feedback', "Aww correct! You're my everything! 💕", "Close... but it's all of them 😘");
+    });
+
+    document.querySelectorAll('#q5 .quiz-option').forEach(opt => {
+      opt.onclick = () => handleQuizClick(opt, 'q5feedback', "Yes! That's our vibe 🥰", "Hmm maybe... but I love them all with you 😏");
+    });
+
+    document.getElementById('yes6').onclick = () => {
+      document.getElementById('q6').style.display = 'none';
+      document.getElementById('celebration').style.display = 'block';
+      for (let i = 0; i < 100; i++) createFloat();
+    };
+
+    document.getElementById('no6').onclick = () => {
+      alert("Noooo 😭 Say yes na... or I'll keep sending floating hearts until you do! 🥺");
+    };
+  </script>
 </body>
-</html> 
+</html>
