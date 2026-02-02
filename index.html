@@ -3,82 +3,343 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Will You Be My Valentine?</title>
+<title>Will You Be My Valentine? 💝 Tonpangmenla</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💝</text></svg>">
 <style>
+  /* Reset & Base Styles */
+  * {
+    box-sizing: border-box;
+  }
   body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ffccd5, #f9e4e8);
-    text-align: center;
-    padding: 50px;
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #ffe4e1, #fff0f5);
     color: #ff4757;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+    padding: 20px;
   }
+
+  /* Container */
+  .container {
+    background: rgba(255,255,255,0.95);
+    padding: 40px 30px;
+    max-width: 800px;
+    width: 100%;
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    text-align: center;
+    position: relative;
+  }
+
+  /* Header & Title */
   h1 {
-    font-size: 2rem;
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    color: #ff6b81;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
-  button {
-    padding: 12px 24px;
-    margin: 10px;
-    font-size: 1.2rem;
+
+  /* Avatar Image */
+  .avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid #ff6b81;
+    box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+    margin: 20px auto;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 35px rgba(255,107,107,0.6);
+  }
+
+  /* Buttons */
+  .btn {
+    padding: 15px 30px;
+    margin: 10px 15px;
+    font-size: 1.4rem;
     border: none;
-    border-radius: 25px;
-    background-color: #ff6b81;
-    color: white;
+    border-radius: 50px;
     cursor: pointer;
-    transition: 0.3s;
+    background-color: #ff6b81;
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(255,107,107,0.3);
+    transition: all 0.3s ease;
   }
-  button:hover {
+  .btn:hover {
+    transform: scale(1.05) translateY(-3px);
     background-color: #ff8787;
   }
-  #message {
-    margin-top: 30px;
-    font-size: 1.5rem;
-    min-height: 50px;
+  #noBtn {
+    background-color: #aaa;
   }
+  #noBtn:hover {
+    background-color: #888;
+  }
+
+  /* Sections (Steps) */
+  .step {
+    display: none;
+    opacity: 0;
+    animation: fadeIn 0.8s forwards;
+  }
+  .step.active {
+    display: block;
+    opacity: 1;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* Secret Hover Text */
+  #secret {
+    margin-top: 15px;
+    font-style: italic;
+    color: #555;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  /* Love Meter */
+  #loveMeterContainer {
+    margin-top: 30px;
+    padding: 10px 20px;
+    background: #ffe4e1;
+    border-radius: 20px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+  }
+  #loveSlider {
+    width: 100%;
+    height: 20px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #ffd6e0;
+    border-radius: 10px;
+    outline: none;
+  }
+  #loveSlider::-webkit-slider-thumb {
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    background: url('https://i.ibb.co/4t2zF1s/heart-thumb.png') no-repeat center/contain;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  #loveValue {
+    margin-top: 15px;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  /* Celebration */
+  #celebration {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 30px;
+    animation: bounce 1.5s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  /* Confetti */
+  .confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: fall 4s linear forwards;
+    pointer-events: none;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* Floating Emoji */
+  .floating {
+    position: absolute;
+    font-size: 2.5rem;
+    pointer-events: none;
+    animation: floatUp 12s linear forwards;
+    opacity: 0.8;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(120vh) rotate(0deg); }
+    100% { transform: translateY(-30vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* Music Toggle Button */
+  #musicToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 24px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 50px;
+    border: 1px solid #fff;
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-size: 1rem;
+    transition: background 0.3s;
+  }
+  #musicToggle:hover {
+    background: rgba(255,255,255,0.9);
+  }
+
 </style>
 </head>
 <body>
 
-<h1>Will You Be My Valentine? 💝</h1>
+<button id="musicToggle">🎵 Play Music</button>
 
-<div id="question">
-  <p>Do you like me?</p>
-  <button id="yesBtn">Yes!</button>
-  <button id="noBtn">Maybe...</button>
+<div class="container">
+
+  <h1>Hey Tonpangmenla oversmart sleeping without me na... 💖✨</h1>
+  <img src="https://i.ibb.co/r7S3X66/grok-image-1769426705.jpg" alt="Tonpangmenla 💕" class="avatar" />
+
+  <!-- Question 1 -->
+  <div id="q1" class="step active">
+    <h2>Do you like me? 🥺</h2>
+    <button class="btn" id="yes1">Yes of course!</button>
+    <button class="btn" id="no1">Hmm... maybe?</button>
+    <p id="secret"> (hover over maybe: I don't just like you... I LOVE YOU silly! 😘❤️) </p>
+  </div>
+
+  <!-- Love Meter -->
+  <div id="q2" class="step">
+    <h2>Show me how much you love me 😍</h2>
+    <div id="loveMeterContainer">
+      <input type="range" min="0" max="10000" value="0" id="loveSlider" />
+    </div>
+    <div id="loveValue">This much → 0%</div>
+    <button class="btn" id="next2">Next naa ❤️</button>
+  </div>
+
+  <!-- Question 2 -->
+  <div id="q3" class="step">
+    <h2>Will you be my Valentine on Feb 14th, 2026? 🌹</h2>
+    <button class="btn" id="yes3">YES YES YES!</button>
+    <button class="btn" id="no3">No way 😏</button>
+  </div>
+
+  <!-- Celebration -->
+  <div id="celebration" class="step">
+    <h2>YAYYYY! You're my Valentine forever! 🎉💝💖💓</h2>
+    <p>I'm the luckiest! Come get endless hugs, kisses & no more sleeping without me na 😘✨</p>
+  </div>
+
 </div>
 
-<div id="response" style="display:none;">
-  <p id="answerText"></p>
-  <button id="nextBtn" style="display:none;">Next</button>
-</div>
-
-<div id="finalMessage" style="margin-top:30px; font-size:2rem; display:none;">
-  <p>YAY! You're my Valentine! 🎉💖</p>
-</div>
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+  <source src="https://res.cloudinary.com/dncywqfpb/video/upload/v1738399057/music_qrhjvy.mp3" type="audio/mpeg" />
+</audio>
 
 <script>
-  const questionDiv = document.getElementById('question');
-  const responseDiv = document.getElementById('response');
-  const answerText = document.getElementById('answerText');
-  const nextBtn = document.getElementById('nextBtn');
-  const finalMsg = document.getElementById('finalMessage');
+  const emojis = ['❤️','💖','💝','💗','💓','🧸','🐻','🌹','✨','😘'];
 
-  document.getElementById('yesBtn').onclick = () => {
-    questionDiv.style.display = 'none';
-    responseDiv.style.display = 'block';
-    answerText.innerHTML = "Aww, I like you too! 💖<br>Want to be my Valentine?";
-    nextBtn.style.display = 'inline-block';
+  // Floating emojis animation
+  function spawnEmoji() {
+    const el = document.createElement('div');
+    el.className = 'floating';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = Math.random() * 90 + 'vw';
+    el.style.top = '100vh';
+    el.style.fontSize = (2 + Math.random() * 2) + 'rem';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 12000);
+  }
+  setInterval(spawnEmoji, 600);
+
+  // Music toggle
+  const music = document.getElementById('bgMusic');
+  document.getElementById('musicToggle').onclick = () => {
+    if (music.paused) {
+      music.volume = 0.4;
+      music.play().catch(() => {});
+      document.getElementById('musicToggle').textContent = '🔇 Stop Music';
+    } else {
+      music.pause();
+      document.getElementById('musicToggle').textContent = '🎵 Play Music';
+    }
   };
 
-  document.getElementById('noBtn').onclick = () => {
-    questionDiv.style.display = 'none';
-    responseDiv.style.display = 'block';
-    answerText.innerHTML = "That's okay! Maybe next time! 😊";
-    nextBtn.style.display = 'none';
+  // Secret hover message
+  document.getElementById('no1').addEventListener('mouseover', () => {
+    document.getElementById('secret').style.opacity = 1;
+  });
+  document.getElementById('no1').addEventListener('mouseout', () => {
+    document.getElementById('secret').style.opacity = 0;
+  });
+
+  // Show specific step
+  function showStep(id) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  // Button interactions
+  document.getElementById('yes1').onclick = () => showStep('q2');
+  document.getElementById('next2').onclick = () => showStep('q3');
+
+  document.getElementById('yes3').onclick = () => {
+    showStep('celebration');
+    // Confetti explosion
+    for (let i=0; i<200; i++) {
+      setTimeout(() => {
+        const conf = document.createElement('div');
+        conf.className = 'confetti';
+        conf.style.left = Math.random() * 100 + 'vw';
+        conf.style.background = ['#ff6b81','#ffe066','#a29bfe'][Math.floor(Math.random()*3)];
+        conf.style.top = '0';
+        conf.style.width = conf.style.height = (4 + Math.random() * 4) + 'px';
+        document.body.appendChild(conf);
+        setTimeout(() => conf.remove(), 6000);
+      }, i * 15);
+    }
   };
 
-  document.getElementById('nextBtn').onclick = () => {
-    responseDiv.style.display = 'none';
-    finalMsg.style.display = 'block';
+  document.getElementById('no3').onclick = () => {
+    showStep('celebration');
+    document.querySelector('#celebration h2').textContent = "Aw, maybe next time! 💖";
+  };
+
+  // Love meter slider
+  const loveSlider = document.getElementById('loveSlider');
+  const loveValueText = document.getElementById('loveValue');
+  loveSlider.oninput = () => {
+    const val = parseInt(loveSlider.value);
+    let percent = Math.round((val/10000)*100);
+    loveValueText.textContent = `This much → ${percent}%`;
+    if (val > 7000) {
+      loveValueText.textContent += ' WOOOOW insane love!! 🥰🚀';
+    } else if (val > 4000) {
+      loveValueText.textContent += ' So much love! 💖';
+    } else if (val > 1000) {
+      loveValueText.textContent += ' To infinity & beyond! 😲💫';
+    } else {
+      loveValueText.textContent += ' Small but mighty! 😊';
+    }
   };
 </script>
 
